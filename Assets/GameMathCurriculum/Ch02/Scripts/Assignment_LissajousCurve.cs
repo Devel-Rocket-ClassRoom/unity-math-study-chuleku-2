@@ -73,10 +73,10 @@ public class Assignment_LissajousCurve : MonoBehaviour
         float x = amplitudeX * Mathf.Sin(2 * Mathf.PI * frequencyX * t + (phaseX * Mathf.Deg2Rad));
         float z = amplitudeZ * Mathf.Sin(2 * Mathf.PI * frequencyZ * t + (phaseZ * Mathf.Deg2Rad));
 
-        Vector3 offset = new Vector3(x, 0f,z);
+        initialPosition = new Vector3(x, 0f,z);
 
- 
-        return initialPosition + offset;
+
+        return initialPosition;
 
 
     }

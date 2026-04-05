@@ -729,11 +729,11 @@ PrefabInstance:
       objectReference: {fileID: 1352208600}
     - target: {fileID: 1575760540138325495, guid: 110c7b8d39da47e44af9b55f7e86a906, type: 3}
       propertyPath: amplitudeX
-      value: 2.23
+      value: 2.29
       objectReference: {fileID: 0}
     - target: {fileID: 1575760540138325495, guid: 110c7b8d39da47e44af9b55f7e86a906, type: 3}
       propertyPath: amplitudeZ
-      value: 1.75
+      value: 2.14
       objectReference: {fileID: 0}
     - target: {fileID: 1575760540138325495, guid: 110c7b8d39da47e44af9b55f7e86a906, type: 3}
       propertyPath: frequencyX
@@ -741,7 +741,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1575760540138325495, guid: 110c7b8d39da47e44af9b55f7e86a906, type: 3}
       propertyPath: frequencyZ
-      value: 0.86
+      value: 1.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 1575760540138325495, guid: 110c7b8d39da47e44af9b55f7e86a906, type: 3}
+      propertyPath: initialPosition.x
+      value: 2.25512
+      objectReference: {fileID: 0}
+    - target: {fileID: 1575760540138325495, guid: 110c7b8d39da47e44af9b55f7e86a906, type: 3}
+      propertyPath: initialPosition.z
+      value: -2.0831673
       objectReference: {fileID: 0}
     - target: {fileID: 5798730304960302702, guid: 110c7b8d39da47e44af9b55f7e86a906, type: 3}
       propertyPath: m_Name
