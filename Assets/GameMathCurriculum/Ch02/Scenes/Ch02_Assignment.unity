@@ -724,6 +724,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1575760540138325495, guid: 110c7b8d39da47e44af9b55f7e86a906, type: 3}
+      propertyPath: phaseX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1575760540138325495, guid: 110c7b8d39da47e44af9b55f7e86a906, type: 3}
       propertyPath: debugUI
       value: 
       objectReference: {fileID: 1352208600}
@@ -737,23 +741,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1575760540138325495, guid: 110c7b8d39da47e44af9b55f7e86a906, type: 3}
       propertyPath: frequencyX
-      value: 1.17
+      value: 1.01
       objectReference: {fileID: 0}
     - target: {fileID: 1575760540138325495, guid: 110c7b8d39da47e44af9b55f7e86a906, type: 3}
       propertyPath: frequencyZ
-      value: 1.22
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1575760540138325495, guid: 110c7b8d39da47e44af9b55f7e86a906, type: 3}
       propertyPath: initialPosition.x
-      value: 2.25512
+      value: 2.2422528
       objectReference: {fileID: 0}
     - target: {fileID: 1575760540138325495, guid: 110c7b8d39da47e44af9b55f7e86a906, type: 3}
       propertyPath: initialPosition.z
-      value: -2.0831673
+      value: 2.048195
       objectReference: {fileID: 0}
     - target: {fileID: 5798730304960302702, guid: 110c7b8d39da47e44af9b55f7e86a906, type: 3}
       propertyPath: m_Name
       value: LissajousMover
+      objectReference: {fileID: 0}
+    - target: {fileID: 5798730304960302702, guid: 110c7b8d39da47e44af9b55f7e86a906, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8276809769565372670, guid: 110c7b8d39da47e44af9b55f7e86a906, type: 3}
       propertyPath: m_LocalPosition.x

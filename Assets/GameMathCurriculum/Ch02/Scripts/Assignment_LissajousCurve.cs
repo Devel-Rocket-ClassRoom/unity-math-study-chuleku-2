@@ -69,11 +69,10 @@ public class Assignment_LissajousCurve : MonoBehaviour
         // φx, φz = 위상 (phaseX, phaseZ) — 도(degree) → 라디안 변환 필요
         //
         // initialPosition을 기준으로 X, Z 오프셋을 더해 최종 위치를 반환하세요.
-        float t = time;
-        float x = amplitudeX * Mathf.Sin(2 * Mathf.PI * frequencyX * t + (phaseX * Mathf.Deg2Rad));
-        float z = amplitudeZ * Mathf.Sin(2 * Mathf.PI * frequencyZ * t + (phaseZ * Mathf.Deg2Rad));
+        float x = amplitudeX * Mathf.Sin(2 * Mathf.PI * frequencyX * time + (phaseX * Mathf.Deg2Rad));
+        float z = amplitudeZ * Mathf.Sin(2 * Mathf.PI * frequencyZ * time + (phaseZ * Mathf.Deg2Rad));
 
-        initialPosition = new Vector3(x, 0f,z);
+        initialPosition = new Vector3(x, 0f,z); 
 
 
         return initialPosition;

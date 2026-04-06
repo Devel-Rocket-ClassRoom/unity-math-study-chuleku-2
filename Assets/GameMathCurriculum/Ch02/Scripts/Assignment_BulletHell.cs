@@ -118,7 +118,6 @@ public class Assignment_BulletHell : MonoBehaviour
             SpiralAngle += spiralTurnSpeed;
         }
         return rotation * Vector3.forward;
-
     }
 
     private Vector3 CalculateFanDirection(int index, int total)
