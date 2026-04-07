@@ -74,7 +74,7 @@ public class Assignment_RotationTrail : MonoBehaviour
         if (trailPositions.Count > 1)
         {
             for (int i = 0; i < trailPositions.Count - 1; i++)
-            {
+            {   
                 float alpha = (float)i / trailPositions.Count;
                 Color fadeColor = new Color(trailColor.r, trailColor.g, trailColor.b, alpha);
 
