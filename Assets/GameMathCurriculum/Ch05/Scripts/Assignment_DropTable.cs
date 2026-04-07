@@ -70,12 +70,12 @@ public class Assignment_DropTable : MonoBehaviour
 
     private void PerformDrop()
     {
-        float sum = 0;
+        totalWeight = 0f;
         foreach (var item in items)
         {
-            sum += item.weight;
+            totalWeight += item.weight;
         }
-        float randomValue = Random.Range(0f,sum);
+        float randomValue = Random.Range(0f,totalWeight);
  
 
         float currentWeightSum = 0;
@@ -97,7 +97,6 @@ public class Assignment_DropTable : MonoBehaviour
         {
             dropHistory.RemoveAt(0);
         }
-        totalWeight = sum;
         UpdateUI();
     }
 
