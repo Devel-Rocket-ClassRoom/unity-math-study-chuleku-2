@@ -12,6 +12,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+using Unity.VisualScripting.ReorderableList;
 
 public class Assignment_DropTable : MonoBehaviour
 {
@@ -69,7 +70,35 @@ public class Assignment_DropTable : MonoBehaviour
 
     private void PerformDrop()
     {
-        // TODO
+        float sum = 0;
+        foreach (var item in items)
+        {
+            sum += item.weight;
+        }
+        float randomValue = Random.Range(0f,sum);
+ 
+
+        float currentWeightSum = 0;
+        for (int i = 0; i < items.Length; i++)
+        {
+            currentWeightSum += items[i].weight;
+
+            if (randomValue <= currentWeightSum)
+            {
+                lastSelectedIndex = i;
+                break;
+            }
+        }
+        if(lastSelectedIndex!=-1)
+        {
+            dropHistory.Add(lastSelectedIndex);
+        }
+        if (dropHistory.Count > MAX_HISTORY)
+        {
+            dropHistory.RemoveAt(0);
+        }
+        totalWeight = sum;
+        UpdateUI();
     }
 
     private void UpdateUI()
