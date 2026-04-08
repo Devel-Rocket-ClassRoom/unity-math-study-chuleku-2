@@ -55,7 +55,31 @@ public class CatmullRomDemo : MonoBehaviour
 
     private void Update()
     {
-        // TODO
+        if(useManualT)
+        {
+            currentT = manualT;
+        }
+        else
+        {
+            elapsedTime += Time.deltaTime * speed;
+            if(loopPath)
+            {
+                currentT = Mathf.Repeat(elapsedTime, 1f);
+            }
+            else
+            {
+                currentT = Mathf.Clamp01(elapsedTime);
+            }
+            currentPosition = EvaluateSpline(currentT);
+            currentTangent = EvaluateSplineTangent(currentT);
+
+            transform.position = currentPosition;
+            if (lookAlongCurve && currentTangent != Vector3.zero)
+            {
+                transform.rotation = Quaternion.LookRotation(currentTangent.normalized);
+            }
+        }
+
 
         UpdateUI();
     }
@@ -64,26 +88,54 @@ public class CatmullRomDemo : MonoBehaviour
     {
         // TODO: q(t) = 0.5 * ((2*P1) + (-P0+P2)*t + (2*P0-5*P1+4*P2-P3)*t^2 + (-P0+3*P1-3*P2+P3)*t^3)
 
-        return Vector3.Lerp(p1, p2, t);
+        float t1 = t*t;
+        float t2 = t * t * t;
+        Vector3 q = 0.5f*((2*p1)+(-p0+p2)*t+ ((2 * p0 -5 * p1 + 4 * p2 - p3) * t1) + ((-p0+3*p1-3*p2+p3)*t2));
+        return q;
     }
 
     private Vector3 EvaluateSpline(float t)
     {
-        // TODO
-        return transform.position;
+        int n = waypoints.Length;
+        if(n<2)
+        {
+            return transform.position;
+        }
+
+        float globalT = t * (n - 1);
+        int segmentIndex = Mathf.FloorToInt(globalT);
+        float localT = globalT - segmentIndex;
+        
+        if(segmentIndex>=n-1)
+        {
+            segmentIndex = n - 2;
+            localT = 1f;
+        }
+
+        Vector3 p0 = GetWaypoint(segmentIndex-1);
+        Vector3 p1 = GetWaypoint(segmentIndex);
+        Vector3 p2 = GetWaypoint(segmentIndex+1);
+        Vector3 p3 = GetWaypoint(segmentIndex+2);
+
+        return CatmullRom(p0, p1, p2, p3,localT);
 
     }
 
     private Vector3 EvaluateSplineTangent(float t)
     {
-        // TODO
-        return Vector3.forward;
+        float delta = 0.001f;
+        Vector3 p1 = EvaluateSpline(Mathf.Clamp01(t - delta));
+        Vector3 p2 = EvaluateSpline(Mathf.Clamp01(t + delta));
+        return (p2 - p1).normalized;
     }
 
     private Vector3 GetWaypoint(int index)
     {
-        // TODO
-        return Vector3.zero;
+        int n = waypoints.Length;
+
+        int wrappedIndex = Mathf.Clamp(index, 0, n - 1);
+        return waypoints[wrappedIndex].position;
+        
     }
 
     private void OnDrawGizmos()
