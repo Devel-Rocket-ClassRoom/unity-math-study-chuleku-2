@@ -129,7 +129,7 @@ public class BezierRandomMover : MonoBehaviour
         float rx = Random.Range(randomx.x, randomx.y);
         float rz = Random.Range(randomz.x, randomz.y);
         float ry = Random.Range(randomy.x, randomy.y);
-        float randomspeed = Random.Range(0.5f, 5f);
+        float randomspeed = Random.Range(3f, 5f);
         waypoint = new Vector3(rx, ry, rz);
 
         Boxes newBoxes = new Boxes
@@ -152,9 +152,12 @@ public class BezierRandomMover : MonoBehaviour
     private void ApplyRandomColor(GameObject target)
     {
         Renderer rend = target.GetComponent<Renderer>();
+        TrailRenderer render = target.GetComponent<TrailRenderer>();
         if (rend != null)
         {
             rend.material.color = Random.ColorHSV(0f, 1f, 0.6f, 1f, 0.7f, 1f);
+            render.material.color = rend.material.color;
+            render.time = 0.1f;
         }
     }
 
