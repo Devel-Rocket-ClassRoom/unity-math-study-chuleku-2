@@ -10,11 +10,12 @@ TagManager:
   - Selectable
   - Unit
   - Ground
+  - Box
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - 

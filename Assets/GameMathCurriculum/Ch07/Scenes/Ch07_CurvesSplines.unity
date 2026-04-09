@@ -280,9 +280,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BezierRandomMover
   startPoint: {fileID: 353912123}
   endPoint: {fileID: 403428749}
+  waypoint: {x: 0, y: 0, z: 0}
   box: {fileID: 7223965021991400021, guid: fd5e0ccae141603468f0ba738bfac8d3, type: 3}
   ball: {fileID: 3701265172113608990, guid: 6481fa5c2078a384089f1c2d68b3d4b5, type: 3}
-  cylinder: {fileID: 1850744588399255444, guid: 81c5dd14ad5325646a0182a61e030b56, type: 3}
+  quad: {fileID: 1850744588399255444, guid: 81c5dd14ad5325646a0182a61e030b56, type: 3}
   spawnBoxCount: 100
 --- !u!4 &152403666
 Transform:
