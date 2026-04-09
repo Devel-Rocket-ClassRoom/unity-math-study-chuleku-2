@@ -11,6 +11,7 @@ public class BezierRandomMover : MonoBehaviour
     [Header("=== 컨베이어 박스 ===")]
     [SerializeField] private GameObject box;
     [SerializeField] private GameObject ball;
+    [SerializeField] private GameObject cylinder;
 
     private Vector3 waypoint;
     public int spawnBoxCount = 5;
@@ -26,20 +27,22 @@ public class BezierRandomMover : MonoBehaviour
 
     private void Update()
     {
-        time += Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.Space)||time== 3f)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            time = 0f;
             for (int i = 0; i < spawnBoxCount; i++)
             {
                 float r = Random.value;
-                if (r > 0.5f)
+                if (r < 0.35f)
                 {
                     SpawnBall();
                 }
-                else
+                else if(r >=0.35f && r<0.7f)
                 {
                     SpawnBox();
+                }
+                else
+                {
+                    SpawnCylinder();
                 }
             }
         }
@@ -67,11 +70,13 @@ public class BezierRandomMover : MonoBehaviour
         GameObject newBox = Instantiate(box, startPoint.position, Quaternion.identity);
         float x = Random.Range(-20, 20);
         float z = Random.Range(-20, 20);
+        float y = Random.Range(-10f, 10f);
         Vector2 randomx = new Vector2(startPoint.position.x + x, endPoint.position.x + z);
         Vector2 randomz = new Vector2(startPoint.position.z + z, endPoint.position.z + z);
+        Vector2 randomy = new Vector2(startPoint.position.y+y, endPoint.position.y+y);
         float rx = Random.Range(randomx.x, randomx.y);
         float rz = Random.Range(randomz.x, randomz.y);
-        float ry = Random.Range(-10f, 10f);
+        float ry = Random.Range(randomy.x, randomy.y);
         float randomspeed = Random.Range(0.5f, 3f);
         waypoint = new Vector3(rx, ry, rz);
 
@@ -91,12 +96,40 @@ public class BezierRandomMover : MonoBehaviour
         GameObject newBox = Instantiate(ball, startPoint.position, Quaternion.identity);
         float x = Random.Range(-5, 5);
         float z = Random.Range(-5, 5);
-        Vector2 randomx = new Vector2(startPoint.position.x + x, endPoint.position.x + z);
-        Vector2 randomz = new Vector2(startPoint.position.z + z, endPoint.position.z + z);
+        float y = Random.Range(-10f, 10f);
+        Vector2 randomx = new Vector2(startPoint.position.x + x, endPoint.position.x + x);
+        Vector2 randomz = new Vector2(startPoint.position.z + z, endPoint.position.z + x);
+        Vector2 randomy = new Vector2(startPoint.position.y + y, endPoint.position.y + y);
         float rx = Random.Range(randomx.x, randomx.y);
         float rz = Random.Range(randomz.x, randomz.y);
-        float ry = Random.Range(-5f, 5f);
-        float randomspeed = Random.Range(0.5f, 3f);
+        float ry = Random.Range(randomy.x, randomy.y);
+        float randomspeed = Random.Range(0.5f, 5f);
+        waypoint = new Vector3(rx, ry, rz);
+
+        Boxes newBoxes = new Boxes
+        {
+            obj = newBox,
+            midPoint = waypoint,
+            move = 0f,
+            speed = randomspeed
+        };
+        ApplyRandomColor(newBox);
+
+        boxList.Add(newBoxes);
+    }
+    private void SpawnCylinder()
+    {
+        GameObject newBox = Instantiate(cylinder, startPoint.position, Quaternion.identity);
+        float x = Random.Range(-5, 5);
+        float z = Random.Range(-5, 5);
+        float y = Random.Range(-10f, 10f);
+        Vector2 randomx = new Vector2(startPoint.position.x + x, endPoint.position.x + x);
+        Vector2 randomz = new Vector2(startPoint.position.z + z, endPoint.position.z + x);
+        Vector2 randomy = new Vector2(startPoint.position.y + y, endPoint.position.y + y);
+        float rx = Random.Range(randomx.x, randomx.y);
+        float rz = Random.Range(randomz.x, randomz.y);
+        float ry = Random.Range(randomy.x, randomy.y);
+        float randomspeed = Random.Range(0.5f, 5f);
         waypoint = new Vector3(rx, ry, rz);
 
         Boxes newBoxes = new Boxes
