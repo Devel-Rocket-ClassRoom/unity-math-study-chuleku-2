@@ -3,19 +3,17 @@ using UnityEngine;
 using System.Collections.Generic;
 public class BezierRandomMover : MonoBehaviour
 {
-    [Header("=== 고정 지점 ===")]
+    [Header("=== 스플라인 경로 ===")]
     [SerializeField] private Transform startPoint;
     [SerializeField] private Transform endPoint;
-
+    [SerializeField] private Vector3 waypoint;
 
     [Header("=== 컨베이어 박스 ===")]
     [SerializeField] private GameObject box;
     [SerializeField] private GameObject ball;
-    [SerializeField] private GameObject cylinder;
-
-    private Vector3 waypoint;
+    [SerializeField] private GameObject quad;
+  
     public int spawnBoxCount = 5;
-    private float time;
     private class Boxes
     {
         public GameObject obj;
@@ -42,7 +40,7 @@ public class BezierRandomMover : MonoBehaviour
                 }
                 else
                 {
-                    SpawnCylinder();
+                    SpawnQuad();
                 }
             }
         }
@@ -73,11 +71,11 @@ public class BezierRandomMover : MonoBehaviour
         float y = Random.Range(-10f, 10f);
         Vector2 randomx = new Vector2(startPoint.position.x + x, endPoint.position.x + z);
         Vector2 randomz = new Vector2(startPoint.position.z + z, endPoint.position.z + z);
-        Vector2 randomy = new Vector2(startPoint.position.y+y, endPoint.position.y+y);
+        Vector2 randomy = new Vector2(startPoint.position.y + y, endPoint.position.y + y);
         float rx = Random.Range(randomx.x, randomx.y);
         float rz = Random.Range(randomz.x, randomz.y);
         float ry = Random.Range(randomy.x, randomy.y);
-        float randomspeed = Random.Range(0.5f, 3f);
+        float randomSpeed = Random.Range(0.5f, 3f);
         waypoint = new Vector3(rx, ry, rz);
 
         Boxes newBoxes = new Boxes
@@ -85,7 +83,7 @@ public class BezierRandomMover : MonoBehaviour
             obj = newBox,
             midPoint = waypoint,
             move = 0f,
-            speed = randomspeed
+            speed = randomSpeed
         };
         ApplyRandomColor(newBox);
 
@@ -94,8 +92,8 @@ public class BezierRandomMover : MonoBehaviour
     private void SpawnBall()
     {
         GameObject newBox = Instantiate(ball, startPoint.position, Quaternion.identity);
-        float x = Random.Range(-5, 5);
-        float z = Random.Range(-5, 5);
+        float x = Random.Range(-20, 20);
+        float z = Random.Range(-20, 20);
         float y = Random.Range(-10f, 10f);
         Vector2 randomx = new Vector2(startPoint.position.x + x, endPoint.position.x + x);
         Vector2 randomz = new Vector2(startPoint.position.z + z, endPoint.position.z + x);
@@ -117,11 +115,11 @@ public class BezierRandomMover : MonoBehaviour
 
         boxList.Add(newBoxes);
     }
-    private void SpawnCylinder()
+    private void SpawnQuad()
     {
-        GameObject newBox = Instantiate(cylinder, startPoint.position, Quaternion.identity);
-        float x = Random.Range(-5, 5);
-        float z = Random.Range(-5, 5);
+        GameObject newBox = Instantiate(quad, startPoint.position, Quaternion.identity);
+        float x = Random.Range(-20, 20);
+        float z = Random.Range(-20, 20);
         float y = Random.Range(-10f, 10f);
         Vector2 randomx = new Vector2(startPoint.position.x + x, endPoint.position.x + x);
         Vector2 randomz = new Vector2(startPoint.position.z + z, endPoint.position.z + x);
@@ -153,11 +151,15 @@ public class BezierRandomMover : MonoBehaviour
     {
         Renderer rend = target.GetComponent<Renderer>();
         TrailRenderer render = target.GetComponent<TrailRenderer>();
+        AnimationCurve curve = new AnimationCurve();
+        curve.AddKey(0.5f, 0f);
+        curve.AddKey(0f, 0.5f);
         if (rend != null)
         {
             rend.material.color = Random.ColorHSV(0f, 1f, 0.6f, 1f, 0.7f, 1f);
             render.material.color = rend.material.color;
-            render.time = 0.1f;
+            render.time = 0.2f;
+            render.widthCurve = curve;
         }
     }
 
