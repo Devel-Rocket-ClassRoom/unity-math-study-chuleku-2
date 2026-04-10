@@ -11,6 +11,7 @@ TagManager:
   - Unit
   - Ground
   - Box
+  - endpoint
   layers:
   - Default
   - TransparentFX
@@ -18,8 +19,8 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
-  - 
+  - Box
+  - endpoint
   - 
   - 
   - 

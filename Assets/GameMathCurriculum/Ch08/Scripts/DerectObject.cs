@@ -31,15 +31,23 @@ public class DerectObject : MonoBehaviour
             else
             {
                 images[i].gameObject.SetActive(true);
-                float y = 30f;
-                screenPos.x = Mathf.Clamp(screenPos.x, 25, Screen.width - 25f);
-                screenPos.y = Mathf.Clamp(screenPos.y, 25, Screen.height - y);
+                float clp = 30f;
+             /* screenPos.x = Mathf.Clamp(screenPos.x, clp, Screen.width - clp);
+                screenPos.y = Mathf.Clamp(screenPos.y, clp, Screen.height - clp);
                 screenPos.z = 0f;
                 if (boxPosition.z < 0f)
                 {
                     screenPos *= -1f;
-                }
-                images[i].transform.position = screenPos;
+                }*/
+                Vector3 local = cam.transform.InverseTransformPoint(Boxes[i].position);
+                Vector2 dir = new Vector2(local.x, local.y).normalized;
+                Vector2 center = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
+                float scale = Mathf.Min(center.x/Mathf.Abs(dir.x),center.y/Mathf.Abs(dir.y));
+                Vector2 pos = center + dir * scale;
+                pos.x = Mathf.Clamp(pos.x,clp,Screen.width-clp);
+                pos.y = Mathf.Clamp(pos.y,clp,Screen.height-clp);
+                images[i].transform.position = new Vector3(pos.x, pos.y, 0f);
+                /*images[i].transform.position = screenPos;*/
             }
         }
     }
